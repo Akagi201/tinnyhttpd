@@ -483,7 +483,7 @@ void unimplemented(int client)
 int main(void)
 {
  int server_sock = -1;
- u_short port = 0;
+ u_short port = 0; // 表示由系统随机分配一个端口, 也可以自己指定一个, 如:8080
  int client_sock = -1;
  struct sockaddr_in client_name;
  socklen_t client_name_len = sizeof(client_name);
@@ -503,6 +503,9 @@ int main(void)
  if (pthread_create(&newthread , NULL, (void *)accept_request, client_sock) != 0)
    perror("pthread_create");
  }
+
+ // 不使用多线程
+ // accept_request(client_sock);
 
  close(server_sock);
 
